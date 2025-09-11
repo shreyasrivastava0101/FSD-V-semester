@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bollywood Fun Form</title>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #9ceeb3, #9ceeb3);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .form-container {
+      background: #fff;
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+      width: 100%;
+      max-width: 500px;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    h2 {
+      text-align: center;
+      color: #c2185b;
+      margin-bottom: 20px;
+    }
+
+    label {
+      font-weight: 600;
+      display: block;
+      margin-bottom: 6px;
+      color: #333;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 18px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    input[type="radio"], input[type="checkbox"] {
+      width: auto;
+      margin-right: 8px;
+    }
+
+    .options {
+      margin-bottom: 16px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #c2185b;
+      border: none;
+      color: #fff;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    button:hover {
+      background: #ad1457;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Form </h2>
+    <form>
+      <!-- Personal Details -->
+      <label for="name">Your Name</label>
+      <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+
+      <label for="email">Email Address</label>
+      <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+      <label for="age">Age</label>
+      <input type="number" id="age" name="age" min="10" max="100" placeholder="Enter your age">
+
+      <!-- Bollywood Questions -->
+      <label for="fav-movie">Favourite Bollywood Movie</label>
+      <select id="fav-movie" name="fav-movie">
+        <option value="">-- Select --</option>
+        <option>3 Idiots</option>
+        <option>Sholay</option>
+        <option>Dilwale Dulhania Le Jayenge</option>
+        <option>Gully Boy</option>
+        <option>Pathaan</option>
+        <option>Kabir Singh</option>
+      </select>
+
+      <label>Which actor do you like the most?</label>
+      <div class="options">
+        <input type="radio" name="actor" value="SRK"> Shah Rukh Khan <br>
+        <input type="radio" name="actor" value="Salman"> Salman Khan <br>
+        <input type="radio" name="actor" value="Ranbir"> Ranbir Kapoor <br>
+        <input type="radio" name="actor" value="Deepika"> Deepika Padukone <br>
+        <input type="radio" name="actor" value="Alia"> Alia Bhatt
+      </div>
+
+      <label>Pick your favourite genres</label>
+      <div class="options">
+        <input type="checkbox" name="genre" value="Comedy"> Comedy <br>
+        <input type="checkbox" name="genre" value="Romance"> Romance <br>
+        <input type="checkbox" name="genre" value="Action"> Action <br>
+        <input type="checkbox" name="genre" value="Drama"> Drama <br>
+        <input type="checkbox" name="genre" value="Musical"> Musical
+      </div>
+
+      <label for="fun-question">If you could be in any Bollywood movie, which one would it be and why?</label>
+      <textarea id="fun-question" name="fun-question" rows="4" placeholder="Write your fun answer here..."></textarea>
+
+      <button type="submit">Submit </button>
+    </form>
+  </div>
+</body>
+</html>
