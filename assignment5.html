@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Records</title>
+</head>
+<body>
+  <input id="name" type="text" placeholder="student name">
+  <input id="marks" type="number" placeholder="marks">
+  <br><br>
+  <button onclick="addStudent()">Add Student</button>
+  <button onclick="showAllStudents()">Show All Students</button>
+  <button onclick="showPassed()">Show Students Who Passed</button>
+  <button onclick="calculateAverage()">Calculate Average Marks</button>
+  <button onclick="findTopper()">Find Topper</button>
+
+  <div id="output" style="margin-top:20px; font-weight:bold;"></div>
+
+  <script>
+    let students = [];
+    function addStudent() {
+      let name = document.getElementById("name").value;
+      let marks = parseInt(document.getElementById("marks").value);
+
+      if (name && !isNaN(marks)) {
+        students.push({ name: name, marks: marks });
+        document.getElementById("output").innerText = `${name} added successfully!`;
+        document.getElementById("name").value = "";
+        document.getElementById("marks").value = "";
+      } else {
+        document.getElementById("output").innerText = "Please enter valid name and marks.";
+      }
+    }
+    function showAllStudents() {
+      let list = students.map(s => `${s.name}: ${s.marks}`).join(", ");
+      displayResult(list || "No students available");
+    }
+    function showPassed() {
+      let passed = students.filter(s => s.marks >= 40);
+      showWithCallback(passed, displayResult);
+    }
+    function calculateAverage() {
+      if (students.length === 0) return displayResult("No students to calculate average.");
+      let total = students.reduce((sum, s) => sum + s.marks, 0);
+      let avg = total / students.length;
+      displayResult(`Average Marks: ${avg.toFixed(2)}`);
+    }
+    function findTopper() {
+      if (students.length === 0) return displayResult("No students available.");
+      let topper = students[0];
+      for (let i = 1; i < students.length; i++) {
+        if (students[i].marks > topper.marks) {
+          topper = students[i];
+        }
+      }
+      displayResult(`Topper: ${topper.name} (${topper.marks} marks)`);
+    }
+
+    function showWithCallback(data, callback) {
+      if (data.length === 0) {
+        callback("No data found.");
+      } else {
+        let list = data.map(s => `${s.name}: ${s.marks}`).join(", ");
+        callback(list);
+      }
+    }
+    function displayResult(msg) {
+      document.getElementById("output").innerText = msg;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Marks System</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background: white;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+    }
+
+    th {
+      background: #007bff;
+      color: white;
+    }
+
+    .right {
+      width: 30%;
+      background: white;
+      padding: 15px;
+      border-radius: 6px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 8px;
+      margin: 6px 0;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: #0056b3;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 6px;
+      margin: 4px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="app"></div> <!-- Empty container, JS will fill -->
+
+  <script>
+    // Data
+    let students = [
+      {name: "Amit", marks: 85},
+      {name: "Priya", marks: 92},
+      {name: "Rahul", marks: 76},
+      {name: "Sneha", marks: 88},
+      {name: "Karan", marks: 95}
+    ];
+    let originalStudents = [...students];
+
+    // Main container
+    let container = document.createElement("div");
+    container.className = "container";
+
+    // Left side
+    let left = document.createElement("div");
+    left.className = "left";
+
+    let heading = document.createElement("h1");
+    heading.textContent = "Student Marks System";
+
+    let para = document.createElement("p");
+    para.textContent = "A simple interactive demo layout to show student marks.";
+
+    let table = document.createElement("table");
+    table.id = "marksTable";
+
+    left.appendChild(heading);
+    left.appendChild(para);
+    left.appendChild(table);
+
+    // Right side
+    let right = document.createElement("div");
+    right.className = "right";
+
+    let controlsHeading = document.createElement("h3");
+    controlsHeading.textContent = "Controls";
+    right.appendChild(controlsHeading);
+
+    let buttons = [
+      {id:"highestBtn", text:"Show Highest"},
+      {id:"averageBtn", text:"Show Average"},
+      {id:"sortBtn", text:"Sort by Marks"},
+      {id:"removeBtn", text:"Remove Last"},
+      {id:"resetBtn", text:"Reset"}
+    ];
+
+    buttons.forEach(btnObj => {
+      let btn = document.createElement("button");
+      btn.className = "btn";
+      btn.id = btnObj.id;
+      btn.textContent = btnObj.text;
+      right.appendChild(btn);
+    });
+
+    // Input group
+    let inputGroup = document.createElement("div");
+    inputGroup.className = "input-group";
+
+    let nameInput = document.createElement("input");
+    nameInput.id = "nameInput";
+    nameInput.placeholder = "Student name";
+
+    let marksInput = document.createElement("input");
+    marksInput.id = "marksInput";
+    marksInput.type = "number";
+    marksInput.placeholder = "Marks";
+
+    let addBtn = document.createElement("button");
+    addBtn.className = "btn";
+    addBtn.id = "addBtn";
+    addBtn.textContent = "Add Student";
+
+    inputGroup.appendChild(nameInput);
+    inputGroup.appendChild(marksInput);
+    inputGroup.appendChild(addBtn);
+    right.appendChild(inputGroup);
+
+    // Append left & right to container
+    container.appendChild(left);
+    container.appendChild(right);
+    document.getElementById("app").appendChild(container);
+
+    // ==== JS Logic ====
+    function renderTable() {
+      table.innerHTML = "";
+      let header = table.insertRow();
+      header.innerHTML = "<th>Name</th><th>Marks</th>";
+      students.forEach(s => {
+        let row = table.insertRow();
+        row.insertCell(0).innerText = s.name;
+        row.insertCell(1).innerText = s.marks;
+      });
+    }
+
+    renderTable();
+
+    // Button functions
+    document.getElementById("highestBtn").onclick = () => {
+      let max = students.reduce((a,b)=>a.marks>b.marks?a:b);
+      alert("Highest: " + max.name + " (" + max.marks + ")");
+    };
+
+    document.getElementById("averageBtn").onclick = () => {
+      let total = students.reduce((sum,s)=>sum+s.marks,0);
+      alert("Average Marks: " + (total/students.length).toFixed(2));
+    };
+
+    document.getElementById("sortBtn").onclick = () => {
+      students.sort((a,b)=>b.marks-a.marks);
+      renderTable();
+    };
+
+    document.getElementById("removeBtn").onclick = () => {
+      students.pop();
+      renderTable();
+    };
+
+    document.getElementById("resetBtn").onclick = () => {
+      students = [...originalStudents];
+      renderTable();
+    };
+
+    document.getElementById("addBtn").onclick = () => {
+      let name = nameInput.value;
+      let marks = parseInt(marksInput.value);
+      if(name && !isNaN(marks)){
+        students.push({name, marks});
+        renderTable();
+        nameInput.value="";
+        marksInput.value="";
+      } else {
+        alert("Enter valid name and marks!");
+      }
+    };
+  </script>
+</body>
+</html>
