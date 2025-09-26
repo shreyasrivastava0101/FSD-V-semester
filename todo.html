@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-do list</title>
+</head>
+<body>
+    <h1>My To Do List</h1>
+    <input type="text" id="taskInput" placeholder="Enter a task">
+    <button id="button1">Add Task</button>
+    <ul id="taskList"></ul>
+    <script>
+        const taskInput = document.getElementById("taskInput");
+        const button1 = document.getElementById("button1");
+        const taskList = document.getElementById("taskList");
+
+        addBtn.addEventListener("click",addTask);
+        function addTask() {
+            const taskText=taskInput.value.trim();
+            if(taskText===""){
+                alert("Please enter a task!");
+                return;
+            }
+
+            //create li element
+            const li=document.createElement("li");
+
+            //Task text
+            const tickBtn=document.createElement("button");
+            tickBtn.textContent="✔";
+        }
+    </script>
+</body>
+</html>
